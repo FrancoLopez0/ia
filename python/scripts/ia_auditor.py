@@ -73,7 +73,7 @@ def auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labe
 
 if __name__ == '__main__':
 
-    if len(sys.argv) >= 4:
+    if len(sys.argv) > 4:
         model_path = sys.argv[1]
         scaler_path = sys.argv[2]
         encoder_path = sys.argv[3]

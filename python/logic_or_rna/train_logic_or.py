@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.model_selection import train_test_split
@@ -39,7 +40,7 @@ def process_dataset(input, output):
     encoder = OneHotEncoder(sparse_output=False)
     output = encoder.fit_transform(output.reshape(-1, 1))
 
-    joblib.dump(encoder, 'assets/encoder_labels' + TITLE + '.joblib')
+    joblib.dump(encoder, 'assets/'+ TITLE +'/encoder_labels' + TITLE + '.joblib')
 
     return input, output
 
@@ -53,7 +54,7 @@ def scale_variables(input_train, input_test):
     sc = StandardScaler()
     input_train = sc.fit_transform(input_train)
     input_test = sc.transform(input_test)
-    joblib.dump(sc, 'assets/scaler_variables' + TITLE + '.joblib')
+    joblib.dump(sc, 'assets/'+ TITLE +'/scaler_variables' + TITLE + '.joblib')
 
     return input_train, input_test
 
@@ -82,6 +83,10 @@ if __name__ == '__main__':
     if len(sys.argv) > 4:
         N_LAYERS = int(sys.argv[4])
 
+    if not os.path.exists('assets/'+ TITLE):
+        os.mkdir('assets/'+ TITLE)
+        print(f"Carpeta '{'assets/'+ TITLE}' creada.")
+
     input, output = import_dataset(FILE_DATASET)
 
     input, output = process_dataset(input, output)
@@ -94,5 +99,5 @@ if __name__ == '__main__':
 
     classifier.fit(input_train, output_train, batch_size=10, epochs=100)
 
-    classifier.save("assets/logic_or_model" + TITLE + ".keras")
+    classifier.save("assets/"+ TITLE +"/model_" + TITLE + ".keras")
 
