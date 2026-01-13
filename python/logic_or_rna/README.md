@@ -1,3 +1,26 @@
+# Como ejecutar el ejemplo desde 0
+
+### 0. Generar entorno virtual
+    py venv -m venv
+    
+    [Windows]
+    ./venv/Scripts/activate
+    
+    [Linux]
+    ./venv/bin/activate
+
+    pip install -r requirements.txt
+
+### 1. Generar el dataset
+    py create_data_set_logic 1000
+
+### 2. Entrenar el modelo
+    py train_logic_or.py <PATH_DATASET> <TITLE> <FUNC_ACTIVATION> (opt)<N_LAYERS>
+
+### 3. Prueba de modelo
+    cd ../scripts
+    py ia_auditor.py <MODEL_PATH> <SCALER_PATH> <ENCODER_PATH> <TEST_DATASET_FILE>
+
 # Resumen 
 Este proyecto trata de la implementacion de una compuerta OR la cual recibe 2 input de tension entre 0-5V, 
 se definio una banda indefinida entre 1.3V y 2V para analizar como se comportaria la IA en estos casos.
@@ -7,7 +30,7 @@ Para ello se entreno una *Red Neuronal* de 2 capas, 1 oculta y 1 de salida. Los 
 
 # Datasets
 
-Se generó un dataset de 1000 valores los cuales se utilizaran el 20% para entrenamiento y el resto para validacion, y un dataset de 250 valores para volver a validar el entramiento.
+Se generó un dataset de 1000 valores los cuales se utilizaran el 20% para entrenamiento y el resto para validación, y un dataset de 250 valores para volver a validar el entramiento.
 
 # Assets
 

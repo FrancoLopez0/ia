@@ -11,13 +11,17 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 import joblib
+import sys
 
 TITLE = "_sigmoid_4_layers"
+FILE_DATASET = ""
+FUNC_ACTIVATION_FINAL = "sigmoid"
+N_LAYERS = 1
 
-def import_dataset():
+def import_dataset(path = '../../datasets/or_logic_dataset_1000.csv'):
     # Importar dataset
 
-    dataset = pd.read_csv('../../datasets/or_logic_dataset_1000.csv')
+    dataset = pd.read_csv(path)
 
     input = dataset.iloc[:, :-1].values
     output = dataset.iloc[:, -1].values
@@ -56,11 +60,10 @@ def scale_variables(input_train, input_test):
 def init_rna():
     classifier = Sequential()
 
-    classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu', input_dim=2))
-    classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
-    classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
+    for i in range(N_LAYERS):
+        classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu', input_dim=2))
 
-    classifier.add(Dense(units=3, kernel_initializer='uniform', activation='sigmoid')) 
+    classifier.add(Dense(units=3, kernel_initializer='uniform', activation=FUNC_ACTIVATION_FINAL)) 
 
     classifier.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
@@ -68,7 +71,18 @@ def init_rna():
 
 if __name__ == '__main__':
 
-    input, output = import_dataset()
+    if len(sys.argv) < 3:
+        print("py train_logic_or.py <FILE_DATASET> <TITLE> <FUNC_ACTIVATION_FINAL> (opt)<N_LAYERS>")
+        sys.exit(1)
+
+    FILE_DATASET = sys.argv[1]
+    TITLE = sys.argv[2]
+    FUNC_ACTIVATION_FINAL = sys.argv[3]
+
+    if len(sys.argv) > 4:
+        N_LAYERS = int(sys.argv[4])
+
+    input, output = import_dataset(FILE_DATASET)
 
     input, output = process_dataset(input, output)
 
