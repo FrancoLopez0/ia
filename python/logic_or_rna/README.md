@@ -1,7 +1,7 @@
 # Como ejecutar el ejemplo desde 0
 
 ### 0. Generar entorno virtual
-    py venv -m .venv
+    python -m venv .venv
     
     [Windows]
     ./venv/Scripts/activate
