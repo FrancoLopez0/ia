@@ -7,7 +7,7 @@
     ./venv/Scripts/activate
     
     [Linux]
-    ./venv/bin/activate
+    source ./venv/bin/activate
 
     pip install -r requirements.txt
 
