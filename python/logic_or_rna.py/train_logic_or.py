@@ -12,7 +12,7 @@ from keras.layers import Dense
 
 import joblib
 
-PRONOM = "_8_layers"
+TITLE = "_8_layers"
 
 def import_dataset():
     # Importar dataset
@@ -35,7 +35,7 @@ def process_dataset(input, output):
     encoder = OneHotEncoder(sparse_output=False)
     output = encoder.fit_transform(output.reshape(-1, 1))
 
-    joblib.dump(encoder, 'assets/encoder_labels' + PRONOM + '.joblib')
+    joblib.dump(encoder, 'assets/encoder_labels' + TITLE + '.joblib')
 
     return input, output
 
@@ -49,7 +49,7 @@ def scale_variables(input_train, input_test):
     sc = StandardScaler()
     input_train = sc.fit_transform(input_train)
     input_test = sc.transform(input_test)
-    joblib.dump(sc, 'assets/scaler_variables' + PRONOM + '.joblib')
+    joblib.dump(sc, 'assets/scaler_variables' + TITLE + '.joblib')
 
     return input_train, input_test
 
@@ -84,5 +84,5 @@ if __name__ == '__main__':
 
     classifier.fit(input_train, output_train, batch_size=10, epochs=100)
 
-    classifier.save("assets/logic_or_model" + PRONOM + ".keras")
+    classifier.save("assets/logic_or_model" + TITLE + ".keras")
 
