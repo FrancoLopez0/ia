@@ -12,7 +12,7 @@ from keras.layers import Dense
 
 import joblib
 
-TITLE = "_8_layers"
+TITLE = "_sigmoid_4_layers"
 
 def import_dataset():
     # Importar dataset
@@ -57,12 +57,8 @@ def init_rna():
     classifier = Sequential()
 
     classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu', input_dim=2))
-    # classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
-    # classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
-    # classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
-    # classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
-    # classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
-    # classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
+    classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
+    classifier.add(Dense(units=2, kernel_initializer='uniform', activation='relu'))
 
     classifier.add(Dense(units=3, kernel_initializer='uniform', activation='sigmoid')) 
 

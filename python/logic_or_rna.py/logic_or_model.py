@@ -2,6 +2,8 @@ import numpy as np
 import joblib
 import pandas as pd
 
+import time
+
 from sklearn.preprocessing import StandardScaler
 from keras.models import load_model
 
@@ -31,22 +33,21 @@ if __name__ == '__main__':
 
     test_data, expected_output = import_dataset()
 
+    expected_output = encoder.inverse_transform(expected_output.reshape(-1, 1))
+
     test_data_final = scale_variables(test_data)
+
+    start_time = time.time()
 
     prediccion_raw = classifier.predict(test_data_final)
     prediccion = encoder.inverse_transform(prediccion_raw)
 
-    done = []
-    correct = 0
-    incorrect = 0
-    
-    for predict, expected in zip(prediccion, expected_output):
+    end_time = time.time()
 
-        if predict == expected :
-            done.append(1)
-            correct += 1
-        else:
-            done.append(0)
-            incorrect += 1
+    elapsed_time = end_time - start_time
 
-    print(correct, incorrect, correct/(correct+incorrect))
+    evaluacion = classifier.evaluate(test_data_final, expected_output)
+
+    print(f"Loss en Test: {evaluacion[0]}")
+    print(f"Accuracy en Test: {evaluacion[1] * 100:.2f}%")
+    print(f"Tiempo de ejecucion: {elapsed_time:.2f} segundos")
