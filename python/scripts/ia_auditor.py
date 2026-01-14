@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import joblib
 from keras.models import load_model
+from keras.utils import plot_model
 from sklearn.metrics import (
     confusion_matrix, 
     ConfusionMatrixDisplay, 
@@ -12,7 +13,7 @@ from sklearn.metrics import (
 import pandas as pd
 import sys
 
-def auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labels):
+def auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labels, _model_plot = False):
     """
     Realiza una auditoría completa de un modelo cargado.
     X_test: Array (N, 2, 1) con tensiones reales.
@@ -45,6 +46,8 @@ def auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labe
     acc = accuracy_score(y_true_indices, y_pred_indices)
     f1 = f1_score(y_true_indices, y_pred_indices, average='weighted')
     report = classification_report(y_true_indices, y_pred_indices, target_names=class_names)
+
+    model.summary()
     
     # 5. Visualización: Matriz de Confusión
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -53,6 +56,9 @@ def auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labe
     disp.plot(cmap='Blues', ax=ax)
     plt.title(f"Matriz de Confusión (Accuracy: {acc:.2%})")
     plt.show()
+
+    if _model_plot:
+        plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
 
     # 6. Salida en formato Markdown para consola
     print("\n" + "="*40)
@@ -85,6 +91,10 @@ if __name__ == '__main__':
 
         y_test_labels = df.iloc[:, -1].to_numpy()
 
-        auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labels)
+        if len(sys.argv) > 5:
+            if sys.argv[5] == "plot":
+                auditor_de_modelo(model_path, scaler_path, encoder_path, FILE_NAME, _model_plot=True)
+            else:
+                auditor_de_modelo(model_path, scaler_path, encoder_path, X_test, y_test_labels)
     else:
-        print("py ia_auditor <model_path> <scaler_path> <encoder_path> <FILE_NAME>")
+        print("py ia_auditor <model_path> <scaler_path> <encoder_path> <data_test_path> (optional)<model_plot>")

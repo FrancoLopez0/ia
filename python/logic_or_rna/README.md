@@ -1,6 +1,7 @@
 # Como ejecutar el ejemplo desde 0
 
 ### 0. Generar entorno virtual
+
     python -m venv .venv
     
     [Windows]
@@ -19,7 +20,7 @@
 ### 2. Entrenar el modelo
     py train_logic_or.py <PATH_DATASET> <TITLE> <FUNC_ACTIVATION> (opt)<N_LAYERS>
 
-### 3. Prueba de modelo
+### 3. Prueba de modelo (Ver README.md en python/scripts)
     cd ../scripts
     py ia_auditor.py <MODEL_PATH> <SCALER_PATH> <ENCODER_PATH> <TEST_DATASET_FILE>
 
@@ -29,6 +30,14 @@ se definio una banda indefinida entre 1.3V y 2V para analizar como se comportari
 
 Para ello se entreno una *Red Neuronal* de 2 capas, 1 oculta y 1 de salida. Los datos de entrenamiento se lograron con el script
 ``create_dataset_logic_or.py`` el cual permite crear datasets basados en las especificaciones anteriores.
+
+### Plot del modelo obtenido con el script ``ia_auditor.py``
+
+![Plot model](plots/model_plot.png)
+
+### Plot utilizando la herramienta Web Externa [Netron](netron.app)
+
+![Plot model Netron](plots/netron_output.png)
 
 # Datasets
 
