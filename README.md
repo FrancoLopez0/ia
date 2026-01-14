@@ -32,7 +32,17 @@ Este sistema podría implementarse para CubeSats los cuales podrian encontrar fa
 
 Propongo comenzar investigando hardware y herramientas utiles para el diseño e implementacion de IA con el objetivo de entender cómo es el flujo de trabajo de diseño de IA.
 
-* Implementacion de librerias como TenserFlow y Keras 
+* Implementacion de librerias como TensorFlow y Keras 
+
+TensorFlow - [https://www.tensorflow.org/?hl=es-419]
+
+TensorFlow Lite - [https://www.tensorflow.org/lite/guide?hl=es-419]
+
+Keras - [https://keras.io/]
+
+* Herramientas de visualizacion de modelos
+
+Netron - [https://netron.app/]
 
 ## Fase 2: Práctica 
 
@@ -47,6 +57,18 @@ Comencemos por generar una pequeña red que implemente la operación lógica OR,
 ## Fase 3: Desarrollo de RN convolucionales
 
 Ampliemos la red neuronal a una convolucional, la cual nos permita por ejemplo clasificar señales cuadradas, senoidal es y triangulares, esto nos permitirá comprender cómo la IA puede reconocer patrones en el tiempo, la cual es útil para nosotros que manejamos señales tanto en el tiempo como en frecuencia 
+
+### Mas información acerca de Redes Convolucionales
+
+The Ultimate Guide to Convolutional Neural Networks (CNN) - [https://www.superdatascience.com/blogs/the-ultimate-guide-to-convolutional-neural-networks-cnn]
+
+Understanding Convolutional Neural Networks with A
+Mathematical Model - [https://arxiv.org/pdf/1609.04112.pdf]
+
+Delving Deep into Rectifiers:
+Surpassing Human-Level Performance on ImageNet Classification - [https://arxiv.org/pdf/1502.01852.pdf]
+
+The 9 Deep Learning Papers You Need To Know About (Understanding CNNs Part 3) - [https://adeshpande3.github.io/The-9-Deep-Learning-Papers-You-Need-To-Know-About.html]
 
 * Implementacion en Python [**Pendiente**]
 
