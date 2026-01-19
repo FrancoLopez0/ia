@@ -6,7 +6,7 @@ LOW_INPUT        = [0, 1.3]
 HIGH_INPUT       = [2, 5]
 UNK_INPUT        = [1.3, 2]
 OUTPUT           = ["LOW", "HIGH", "INDEFINIDO"]
-OPERATIONS_CASES = ["LOW OR LOW", "LOW OR HIGH", "HIGH OR LOW", "HIGH OR HIGH", "INDEFINIDO OR HIGH", "LOW OR INDEFINIDO", "INDEFINIDO OR INDEFINIDO"]
+OPERATIONS_CASES = ["LOW OR LOW", "LOW OR HIGH", "HIGH OR LOW", "HIGH OR HIGH", "INDEFINIDO OR HIGH", "LOW OR INDEFINIDO", "INDEFINIDO OR INDEFINIDO", "HIGH OR INDEFINIDO", "INDEFINIDO OR LOW"]
 
 def generate_voltage_or_dataset(samples_per_case=250):
     
@@ -37,9 +37,15 @@ def generate_voltage_or_dataset(samples_per_case=250):
             # Caso 4: INDEFINIDO OR HIGH -> INDEFINIDO
             v1, v2 = np.random.uniform(UNK_INPUT[0], UNK_INPUT[1] ), np.random.uniform(HIGH_INPUT[0], HIGH_INPUT[1])
             data = np.append(data, [[v1, v2, OUTPUT[2]]], axis=0)
+        if operation_case == "HIGH OR INDEFINIDO":
+            v1, v2 = np.random.uniform(HIGH_INPUT[0], HIGH_INPUT[1] ), np.random.uniform(UNK_INPUT[0], UNK_INPUT[1])
+            data = np.append(data, [[v1, v2, OUTPUT[2]]], axis=0)
         if operation_case == "LOW OR INDEFINIDO":
             # Caso 5: LOW OR INDEFINIDO -> INDEFINIDO
             v1, v2 = np.random.uniform(LOW_INPUT[0], LOW_INPUT[1] ), np.random.uniform(UNK_INPUT[0], UNK_INPUT[1])
+            data = np.append(data, [[v1, v2, OUTPUT[2]]], axis=0)
+        if operation_case == "INDEFINIDO OR LOW":
+            v1, v2 = np.random.uniform(UNK_INPUT[0], UNK_INPUT[1] ), np.random.uniform(LOW_INPUT[0], LOW_INPUT[1])
             data = np.append(data, [[v1, v2, OUTPUT[2]]], axis=0)
         if operation_case == "INDEFINIDO OR INDEFINIDO":
             # Caso 5: INDEFINIDO OR INDEFINIDO -> INDEFINIDO
